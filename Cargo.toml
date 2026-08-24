@@ -3,6 +3,9 @@ name = "koro"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "libkoro"
+
 [dependencies]
 mlua = { version = "0.11.1", features = ["luau"] }
 sysinfo = "0.37.0"

@@ -1,8 +1,4 @@
-mod std_lib;
 mod cli;
-mod runtime;
-mod util;
-mod luau_modules;
 
 use mlua::prelude::*;
 
@@ -14,9 +10,9 @@ fn main() -> LuaResult<()> {
         return Ok(())
     }
 
-    let duc = runtime::Runtime::new();
-    duc.open_globals()?;
-    duc.load_string(arg_return)?;
+    let runtime = libkoro::runtime::new();
+    runtime.open_globals()?;
+    runtime.load_string(arg_return)?;
 
     Ok(())
 }
