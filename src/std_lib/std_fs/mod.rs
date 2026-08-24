@@ -1,10 +1,10 @@
-pub mod lua_file_metadata;
+pub mod luau_file_metadata;
 
 use std::fs;
 
 use mlua::prelude::*;
 
-use lua_file_metadata::LuaFileMetadata;
+use luau_file_metadata::LuauFileMetadata;
 
 pub fn create(luau: &Lua) -> LuaResult<LuaTable> {
     let table = luau.create_table()?;
@@ -84,10 +84,10 @@ fn fs_remove_dir_all(_: &Lua, path: String) -> LuaResult<()> {
     Ok(())
 }
 
-fn fs_metadata(_: &Lua, path: String) -> LuaResult<LuaFileMetadata> {
+fn fs_metadata(_: &Lua, path: String) -> LuaResult<LuauFileMetadata> {
     if fs::exists(&path)? != true {
         return Err(mlua::Error::runtime("invalid path at fs.metadata"))
     }
 
-    Ok(LuaFileMetadata { metadata: fs::metadata(path)? })
+    Ok(LuauFileMetadata { metadata: fs::metadata(path)? })
 }
