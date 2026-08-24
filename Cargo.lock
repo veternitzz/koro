@@ -42,17 +42,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9555578bc9e57714c812a1f84e4fc5b4d21fcb063490c624de019f7464c91268"
 
 [[package]]
-name = "duc"
-version = "0.1.0"
-dependencies = [
- "mlua",
- "serde",
- "serde_json",
- "symlink",
- "sysinfo",
-]
-
-[[package]]
 name = "either"
 version = "1.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -84,6 +73,17 @@ checksum = "38f262f097c174adebe41eb73d66ae9c06b2844fb0da69969647bbddd9b0538a"
 dependencies = [
  "getrandom",
  "libc",
+]
+
+[[package]]
+name = "koro"
+version = "0.1.0"
+dependencies = [
+ "mlua",
+ "serde",
+ "serde_json",
+ "symlink",
+ "sysinfo",
 ]
 
 [[package]]
