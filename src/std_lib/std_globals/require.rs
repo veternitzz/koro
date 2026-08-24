@@ -1,4 +1,4 @@
-use std::{fs};
+use std::{format, fs};
 
 use crate::std_lib::{self, *};
 
@@ -21,7 +21,7 @@ fn get_std_library(luau: &Lua, path: String) -> LuaResult<LuaTable> {
         "@std/io" => Ok(std_io::create(&luau)?),
         "@std/sys" => Ok(std_sys::create(&luau)?),
         "@std/fmt" => Ok(std_fmt::create(&luau)?),
-        &_ => Err(LuaError::RuntimeError(String::from("invalid standard library")))
+        &_ => Err(LuaError::RuntimeError(String::from(format!("invalid standard library: {}", path))))
     }
 }
 
