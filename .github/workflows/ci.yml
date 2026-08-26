@@ -1,0 +1,59 @@
+name: Rust
+
+on:
+  push:
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows x86_64
+            runner-os: windows-2022
+            cargo-target: x86_64-pc-windows-msvc
+
+          - name: Windows aarch64
+            runner-os: windows-11-arm
+            cargo-target: aarch64-pc-windows-msvc
+
+          - name: Linux x86_64
+            runner-os: ubuntu-22.04
+            cargo-target: x86_64-unknown-linux-gnu
+
+          - name: Linux aarch64
+            runner-os: ubuntu-22.04-arm
+            cargo-target: aarch64-unknown-linux-gnu
+
+          - name: macOS x86_64
+            runner-os: macos-15
+            cargo-target: x86_64-apple-darwin
+
+          - name: macOS aarch64
+            runner-os: macos-15
+            cargo-target: aarch64-apple-darwin
+
+    name: CI - ${{ matrix.name }}
+    runs-on: ${{ matrix.runner-os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build
+        run: |
+          cargo build --target ${{ matrix.cargo-target }}
+
+      - name: Test
+        run: |
+          cargo test
